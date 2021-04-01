@@ -13,7 +13,23 @@ public class DetectEnemy : MonoBehaviour
         {
             Debug.Log("Enemy Found");
             _shipFire = GetComponentInParent<ShipFire>();
-            _shipFire.target = other.gameObject;
+            _shipFire.targets.Add(other.gameObject);
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.tag == StringManager.enemyTag)
+        {
+            _shipFire = GetComponentInParent<ShipFire>();
+            
+            for (int i = 0; i < _shipFire.targets.Count; i++)
+            {
+                if (_shipFire.targets[i].name == other.name)
+                {
+                    _shipFire.targets.RemoveAt(i);
+                }
+            }
         }
     }
 }

@@ -1,27 +1,31 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ShipFire : MonoBehaviour
 {
-    public GameObject target { get; set; }
+    public List<GameObject> targets = new List<GameObject>();
 
     public void Update()
     {
-        if (target != null)
+        if (targets.Count > 0)
         {
-            this.gameObject.transform.LookAt(target.transform);
+            this.gameObject.transform.LookAt(targets[0].transform);
             Shoot();
         }
     }
 
-    private float _shootCooldown = 100f;
+    private float _shootCooldown = 600f;
 
     private void Shoot()
     {
         if (_shootCooldown <= 0)
         {
-            Destroy(target); //TODO: replace with HP
+            Destroy(targets[0]); //TODO: replace with HP
+            targets.RemoveAt(0);
+
+            _shootCooldown = 600f;
         }
         else
         {
