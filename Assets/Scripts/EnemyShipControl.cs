@@ -35,11 +35,5 @@ public class EnemyShipControl : MonoBehaviour
         {
             _wayPointIndex += 1;
         }
-
-        //Sets the current waypoint back to the first one if the last waypoint has been reached
-        if (_wayPointIndex == _wayPoints.Length)
-        {
-            _wayPointIndex = 0;
-        }
     }
 }
